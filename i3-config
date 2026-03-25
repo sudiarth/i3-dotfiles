@@ -55,7 +55,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -104,7 +104,8 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
+bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -214,10 +215,12 @@ client.urgent           #ff5555   #ff5555   #f8f8f2   #ff5555   #ff5555
 client.placeholder      #282a36   #282a36   #f8f8f2   #282a36   #282a36
 client.background       #1a1a2e
 
-# Window borders
+# Window borders (no title bars)
 default_border pixel 2
 default_floating_border pixel 2
 hide_edge_borders smart
+for_window [class=".*"] border pixel 2
+for_window [title=".*"] border pixel 2
 
 # Gaps
 gaps inner 6
@@ -262,5 +265,5 @@ bindsym $mod+o move workspace to output down
 # ==============================================================================
 # First arg = first monitor (HDMI-A-0), Second arg = second monitor (eDP)
 exec_always --no-startup-id feh --bg-fill \
-    ~/Pictures/wallpapers/anime-city-glow.jpg \
-    ~/Pictures/wallpapers/anime-scenery-sunset.jpg
+    ~/Pictures/wallpapers/minimal-landscape-4k.jpg \
+    ~/Pictures/wallpapers/minimal-landscape-4k.jpg
