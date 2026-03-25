@@ -3,7 +3,7 @@
 # =============================================================================
 
 set $mod Mod4
-font pango:DejaVu Sans Mono 9
+font pango:FontAwesome 9, Poppins Regular 9
 
 # Autostart
 exec --no-startup-id dex --autostart --environment i3
@@ -21,9 +21,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 # Kill window
 bindsym $mod+Shift+q kill
 
-# App launcher (adi1090x/rofi type-3 tiling grid)
-bindsym $mod+space exec --no-startup-id ~/.config/rofi/launchers/type-3/launcher.sh
-bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-3/launcher.sh
+# App launcher (adi1090x/rofi type-1)
+bindsym $mod+space exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
 
 # Power menu (adi1090x/rofi type-1)
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
@@ -116,16 +116,16 @@ bindsym $mod+r mode "resize"
 # WORKSPACES
 # =============================================================================
 
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 "1:One"
+set $ws2 "2:Two"
+set $ws3 "3:Three"
+set $ws4 "4:Four"
+set $ws5 "5:Five"
+set $ws6 "6:Six"
+set $ws7 "7:Seven"
+set $ws8 "8:Eight"
+set $ws9 "9:Nine"
+set $ws10 "10:Ten"
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -153,24 +153,27 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # APPEARANCE
 # =============================================================================
 
-# No title bars
-default_border pixel 2
-default_floating_border pixel 2
+# No title bars, thick borders (addy-dclxvi style)
+default_border pixel 4
+default_floating_border pixel 4
 hide_edge_borders smart
-for_window [class=".*"] border pixel 2
-for_window [title=".*"] border pixel 2
+for_window [class=".*"] border pixel 4
 
 # Gaps
-gaps inner 8
+gaps inner 12
 gaps outer 0
 smart_gaps on
 
+# Window rules (floating for media/archive apps)
+for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] floating enable
+for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] focus
+
 # Nord colors         border    bg        text      indicator child_border
-client.focused          #5e81ac   #5e81ac   #eceff4   #88c0d0   #5e81ac
-client.focused_inactive #3b4252   #3b4252   #eceff4   #3b4252   #00000000
-client.unfocused        #2e3440   #2e3440   #4c566a   #2e3440   #00000000
-client.urgent           #bf616a   #bf616a   #eceff4   #bf616a   #bf616a
-client.placeholder      #2e3440   #2e3440   #eceff4   #2e3440   #2e3440
+client.focused          #bf616a   #3b4252   #d8dee9   #b48ead   #5e81ac
+client.focused_inactive #3b4252   #3b4252   #d8dee9   #3b4252   #3b4252
+client.unfocused        #3b4252   #3b4252   #4c566a   #3b4252   #3b4252
+client.urgent           #3b4252   #ebcb8b   #3b4252   #3b4252   #3b4252
+client.placeholder      #3b4252   #3b4252   #d8dee9   #3b4252   #3b4252
 client.background       #2e3440
 
 # =============================================================================
@@ -180,19 +183,21 @@ client.background       #2e3440
 bar {
         status_command i3status -c ~/.config/i3status/config
         position bottom
-        separator_symbol "  "
+        workspace_min_width 48
+        padding 2px 8px 2px 8px
+        strip_workspace_numbers yes
         tray_output primary
 
         colors {
             background #2e3440
             statusline #d8dee9
-            separator  #4c566a
+            separator  #2e3440
 
-            focused_workspace  #5e81ac   #5e81ac   #eceff4
-            active_workspace   #4c566a   #4c566a   #d8dee9
+            focused_workspace  #2e3440   #2e3440   #5e81ac
+            active_workspace   #2e3440   #2e3440   #d8dee9
             inactive_workspace #2e3440   #2e3440   #4c566a
-            urgent_workspace   #bf616a   #bf616a   #eceff4
-            binding_mode       #b48ead   #b48ead   #eceff4
+            urgent_workspace   #2e3440   #bf616a   #eceff4
+            binding_mode       #2e3440   #b48ead   #eceff4
         }
 }
 
