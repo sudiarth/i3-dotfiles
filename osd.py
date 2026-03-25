@@ -68,26 +68,45 @@ class DonutOSD(Gtk.Window):
             cr.arc(cx, cy, radius, start, end)
             cr.stroke()
 
-        # Icon
+        # Icon + text stacked vertically, centered as a unit
         cr.set_source_rgba(0.95, 0.95, 0.95, 0.9)
+
         cr.select_font_face(
             "FontAwesome", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
         )
         cr.set_font_size(28)
-        ext = cr.text_extents(ICON)
-        cr.move_to(
-            cx - ext.width / 2 - ext.x_bearing, cy - 6 - ext.height / 2 - ext.y_bearing
-        )
-        cr.show_text(ICON)
+        icon_ext = cr.text_extents(ICON)
 
-        # Value text
         cr.select_font_face(
             "Poppins", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
         )
         cr.set_font_size(14)
         text = LABEL if LABEL else f"{VALUE}%"
-        ext = cr.text_extents(text)
-        cr.move_to(cx - ext.width / 2 - ext.x_bearing, cy + 18 - ext.y_bearing)
+        text_ext = cr.text_extents(text)
+
+        gap = 8
+        total_h = icon_ext.height + gap + text_ext.height
+        top_y = cy - total_h / 2
+
+        # Draw icon
+        cr.select_font_face(
+            "FontAwesome", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
+        )
+        cr.set_font_size(28)
+        cr.move_to(
+            cx - icon_ext.width / 2 - icon_ext.x_bearing, top_y - icon_ext.y_bearing
+        )
+        cr.show_text(ICON)
+
+        # Draw value text
+        cr.select_font_face(
+            "Poppins", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
+        )
+        cr.set_font_size(14)
+        cr.move_to(
+            cx - text_ext.width / 2 - text_ext.x_bearing,
+            top_y + icon_ext.height + gap - text_ext.y_bearing,
+        )
         cr.show_text(text)
 
         return False
