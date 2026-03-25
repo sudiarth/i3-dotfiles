@@ -28,6 +28,7 @@ echo "=== Installing packages ==="
 apt update
 apt install -y \
     git \
+    conky-all \
     i3 \
     i3status \
     i3lock \
@@ -65,6 +66,11 @@ echo "=== Setting up i3status config ==="
 mkdir -p "$REAL_HOME/.config/i3status"
 cp "$SCRIPT_DIR/i3status-config" "$REAL_HOME/.config/i3status/config"
 chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3status/config"
+
+echo "=== Setting up conky cyberpunk widget ==="
+mkdir -p "$REAL_HOME/.config/conky"
+cp "$SCRIPT_DIR/conky-cyberpunk.conf" "$REAL_HOME/.config/conky/cyberpunk.conf"
+chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/conky"
 
 echo "=== Setting up adi1090x/rofi themes ==="
 ROFI_TMP=$(mktemp -d)
