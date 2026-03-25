@@ -46,6 +46,9 @@ apt install -y \
     fonts-font-awesome \
     gtk3-nocsd \
     gnome-keyring \
+    python3-gi \
+    python3-cairo \
+    gir1.2-gtk-3.0 \
     arc-theme \
     breeze-gtk-theme \
     numix-gtk-theme \
@@ -73,8 +76,14 @@ mkdir -p "$REAL_HOME/.config/i3"
 cp "$SCRIPT_DIR/i3-config" "$REAL_HOME/.config/i3/config"
 cp "$SCRIPT_DIR/show-keys.sh" "$REAL_HOME/.config/i3/show-keys.sh"
 cp "$SCRIPT_DIR/lock.sh" "$REAL_HOME/.config/i3/lock.sh"
+cp "$SCRIPT_DIR/volume.sh" "$REAL_HOME/.config/i3/volume.sh"
+cp "$SCRIPT_DIR/brightness.sh" "$REAL_HOME/.config/i3/brightness.sh"
+cp "$SCRIPT_DIR/osd.py" "$REAL_HOME/.config/i3/osd.py"
 chmod +x "$REAL_HOME/.config/i3/show-keys.sh"
 chmod +x "$REAL_HOME/.config/i3/lock.sh"
+chmod +x "$REAL_HOME/.config/i3/volume.sh"
+chmod +x "$REAL_HOME/.config/i3/brightness.sh"
+chmod +x "$REAL_HOME/.config/i3/osd.py"
 chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3"
 
 echo "=== Setting up i3status config ==="
