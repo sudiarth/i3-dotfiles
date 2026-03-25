@@ -160,7 +160,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # No title bars, thick borders (addy-dclxvi style)
 default_border pixel 11
 default_floating_border pixel 11
-hide_edge_borders smart
+hide_edge_borders none
 for_window [class=".*"] border pixel 11
 
 # Gaps
