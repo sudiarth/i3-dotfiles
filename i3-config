@@ -13,6 +13,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id ibus exit
 exec --no-startup-id picom --backend glx --no-fading-openclose --frame-opacity 0.22
+exec --no-startup-id dunst
 
 # =============================================================================
 # KEYBINDINGS
