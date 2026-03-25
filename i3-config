@@ -173,7 +173,7 @@ for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] floating enable
 for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] focus
 
 # Monochrome grayscale  border    bg        text      indicator child_border
-client.focused          #F2F2F2   #303030   #F2F2F2   #C2C2C2   #F2F2F2
+client.focused          #F2F2F2   #303030   #F2F2F2   #F2F2F2   #F2F2F2
 client.focused_inactive #616161   #303030   #919191   #616161   #616161
 client.unfocused        #616161   #303030   #919191   #616161   #616161
 client.urgent           #F2F2F2   #F2F2F2   #303030   #F2F2F2   #F2F2F2
