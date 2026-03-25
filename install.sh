@@ -27,6 +27,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 echo "=== Installing packages ==="
 apt update
 apt install -y \
+    git \
     i3 \
     i3status \
     i3lock \
@@ -65,11 +66,38 @@ mkdir -p "$REAL_HOME/.config/i3status"
 cp "$SCRIPT_DIR/i3status-config" "$REAL_HOME/.config/i3status/config"
 chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3status/config"
 
-echo "=== Setting up power menu ==="
-mkdir -p "$REAL_HOME/.local/bin"
-cp "$SCRIPT_DIR/powermenu" "$REAL_HOME/.local/bin/powermenu"
-chmod +x "$REAL_HOME/.local/bin/powermenu"
-chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.local/bin/powermenu"
+echo "=== Setting up adi1090x/rofi themes ==="
+ROFI_TMP=$(mktemp -d)
+sudo -u "$REAL_USER" git clone --depth 1 https://github.com/adi1090x/rofi.git "$ROFI_TMP"
+# Run the setup script as the real user (it copies files to ~/.config/rofi)
+sudo -u "$REAL_USER" bash "$ROFI_TMP/setup.sh" <<< "Y" || true
+rm -rf "$ROFI_TMP"
+
+# Apply Nord color scheme to all rofi components
+echo "=== Applying Nord color scheme to rofi ==="
+for colors_file in $(find "$REAL_HOME/.config/rofi" -path "*/shared/colors.rasi"); do
+    cat > "$colors_file" << 'RASI'
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Colors
+ *
+ * Available Colors Schemes
+ *
+ * adapta    catppuccin    everforest    navy       paper
+ * arc       cyberpunk     gruvbox       nord       solarized
+ * black     dracula       lovelace      nord    yousai
+ *
+ **/
+
+/* Import color-scheme from `colors` directory */
+
+@import "~/.config/rofi/colors/nord.rasi"
+RASI
+    chown "$REAL_USER:$REAL_USER" "$colors_file"
+done
 
 echo "=== Copying wallpapers ==="
 mkdir -p "$REAL_HOME/Pictures/wallpapers"

@@ -25,8 +25,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
 
-# Power menu (adi1090x/rofi type-2)
-bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-2/powermenu.sh
+# Power menu (adi1090x/rofi type-1)
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
 
 # Screenshot
 bindsym Print exec --no-startup-id scrot ~/Pictures/screenshot-%Y%m%d-%H%M%S.png
