@@ -57,12 +57,14 @@ mkdir -p ~/.config/dunst
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -d "$SCRIPT_DIR/wallpapers" ]; then
     mkdir -p ~/.config/i3/wallpapers
-    cp "$SCRIPT_DIR"/wallpapers/*.jpg ~/.config/i3/wallpapers/ 2>/dev/null
+    cp "$SCRIPT_DIR"/wallpapers/*.{jpg,png} ~/.config/i3/wallpapers/ 2>/dev/null
     # Set default wallpaper (change this to your preferred one)
-    ln -sf ~/.config/i3/wallpapers/tokyo-night.jpg ~/.config/i3/wallpaper.jpg
+    ln -sf ~/.config/i3/wallpapers/anime-city-night.jpg ~/.config/i3/wallpaper.jpg
     echo "  Wallpapers copied to ~/.config/i3/wallpapers/"
-    echo "  Default: tokyo-night.jpg"
-    echo "  To change: ln -sf ~/.config/i3/wallpapers/FILENAME.jpg ~/.config/i3/wallpaper.jpg"
+    echo "  Default: anime-city-night.jpg"
+    echo "  Available:"
+    ls -1 "$SCRIPT_DIR"/wallpapers/ 2>/dev/null | sed 's/^/    - /'
+    echo "  To change: ln -sf ~/.config/i3/wallpapers/FILENAME ~/.config/i3/wallpaper.jpg"
 fi
 
 # =============================================================================
