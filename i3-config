@@ -10,7 +10,7 @@ exec --no-startup-id eval $(gnome-keyring-daemon --start --components=pkcs11,sec
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 exec --no-startup-id nm-applet
-exec --no-startup-id picom --backend glx --no-fading-openclose
+exec --no-startup-id picom --backend glx --no-fading-openclose --inactive-opacity 0.22
 
 # =============================================================================
 # KEYBINDINGS
@@ -158,10 +158,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # =============================================================================
 
 # No title bars, thick borders (addy-dclxvi style)
-default_border pixel 4
-default_floating_border pixel 4
+default_border pixel 11
+default_floating_border pixel 11
 hide_edge_borders smart
-for_window [class=".*"] border pixel 4
+for_window [class=".*"] border pixel 11
 
 # Gaps
 gaps inner 12
