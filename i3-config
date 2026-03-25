@@ -214,7 +214,8 @@ bar {
 
 exec_always --no-startup-id xrandr --output eDP --off && xrandr \
     --output HDMI-A-0 --mode 1920x1080 --pos 0x0 --primary \
-    --output eDP --mode 2880x1800 --pos 0x1080 --scale-from 1920x1200
+    --output eDP --mode 2880x1800 --pos 0x1080 --scale-from 1920x1200 \
+    && sleep 1 && feh --bg-fill ~/Pictures/wallpapers/541062.jpg ~/Pictures/wallpapers/541062.jpg
 
 workspace 1 output HDMI-A-0
 workspace 2 output HDMI-A-0
@@ -231,7 +232,5 @@ bindsym $mod+p move workspace to output up
 bindsym $mod+o move workspace to output down
 
 # =============================================================================
-# WALLPAPER
+# WALLPAPER (set after xrandr above)
 # =============================================================================
-
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/541062.jpg ~/Pictures/wallpapers/541062.jpg
