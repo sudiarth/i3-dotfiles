@@ -2,7 +2,7 @@
 # =============================================================================
 # i3 Desktop Setup - Single Install Script
 # =============================================================================
-# Sets up i3 with Nord theme, rofi, i3status, wallpapers, multi-monitor,
+# Sets up i3 with cyberpunk theme, rofi, i3status, wallpapers, multi-monitor,
 # GTK themes, power menu, picom compositor, and useful tools.
 #
 # Usage:
@@ -45,6 +45,7 @@ apt install -y \
     blueman \
     fonts-font-awesome \
     gtk3-nocsd \
+    gnome-keyring \
     arc-theme \
     breeze-gtk-theme \
     numix-gtk-theme \
@@ -56,15 +57,34 @@ apt install -y \
     breeze-cursor-theme
 
 echo ""
+echo "=== Installing Poppins font ==="
+mkdir -p "$REAL_HOME/.local/share/fonts"
+FONT_TMP=$(mktemp -d)
+for weight in Regular Bold Medium; do
+    curl -sL "https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-${weight}.ttf" \
+        -o "$REAL_HOME/.local/share/fonts/Poppins-${weight}.ttf"
+done
+chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/.local/share/fonts"
+sudo -u "$REAL_USER" fc-cache -f
+
+echo ""
 echo "=== Setting up i3 config ==="
 mkdir -p "$REAL_HOME/.config/i3"
 cp "$SCRIPT_DIR/i3-config" "$REAL_HOME/.config/i3/config"
-chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3/config"
+cp "$SCRIPT_DIR/show-keys.sh" "$REAL_HOME/.config/i3/show-keys.sh"
+cp "$SCRIPT_DIR/lock.sh" "$REAL_HOME/.config/i3/lock.sh"
+chmod +x "$REAL_HOME/.config/i3/show-keys.sh"
+chmod +x "$REAL_HOME/.config/i3/lock.sh"
+chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3"
 
 echo "=== Setting up i3status config ==="
 mkdir -p "$REAL_HOME/.config/i3status"
 cp "$SCRIPT_DIR/i3status-config" "$REAL_HOME/.config/i3status/config"
 chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3status/config"
+
+echo "=== Setting up xsessionrc (GNOME Keyring) ==="
+cp "$SCRIPT_DIR/xsessionrc" "$REAL_HOME/.xsessionrc"
+chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.xsessionrc"
 
 echo "=== Setting up adi1090x/rofi themes ==="
 ROFI_TMP=$(mktemp -d)
@@ -131,6 +151,7 @@ echo "    Mod+f          Fullscreen"
 echo "    Mod+h/j/k/l    Focus left/down/up/right"
 echo "    Mod+1-0        Switch workspace"
 echo "    Mod+p/o        Move workspace between monitors"
+echo "    Mod+F1         Show all keybindings"
 echo "    Print          Screenshot"
 echo ""
 echo "  Settings apps:"

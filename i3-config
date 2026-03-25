@@ -3,11 +3,12 @@
 # =============================================================================
 
 set $mod Mod4
-font pango:FontAwesome 9, Poppins Regular 9
+font pango:FontAwesome 11, Poppins Regular 11
 
 # Autostart
+exec --no-startup-id eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id picom --backend glx --no-fading-openclose
 
@@ -27,6 +28,9 @@ bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
 
 # Power menu (adi1090x/rofi type-1)
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
+
+# Show keybindings
+bindsym $mod+F1 exec --no-startup-id ~/.config/i3/show-keys.sh
 
 # Screenshot
 bindsym Print exec --no-startup-id scrot ~/Pictures/screenshot-%Y%m%d-%H%M%S.png
@@ -116,16 +120,16 @@ bindsym $mod+r mode "resize"
 # WORKSPACES
 # =============================================================================
 
-set $ws1 "1:One"
-set $ws2 "2:Two"
-set $ws3 "3:Three"
-set $ws4 "4:Four"
-set $ws5 "5:Five"
-set $ws6 "6:Six"
-set $ws7 "7:Seven"
-set $ws8 "8:Eight"
-set $ws9 "9:Nine"
-set $ws10 "10:Ten"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -168,13 +172,13 @@ smart_gaps on
 for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] floating enable
 for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] focus
 
-# Nord colors         border    bg        text      indicator child_border
-client.focused          #bf616a   #3b4252   #d8dee9   #b48ead   #5e81ac
-client.focused_inactive #4c566a   #3b4252   #d8dee9   #4c566a   #4c566a
-client.unfocused        #4c566a   #3b4252   #4c566a   #4c566a   #4c566a
-client.urgent           #bf616a   #ebcb8b   #3b4252   #bf616a   #bf616a
-client.placeholder      #3b4252   #3b4252   #d8dee9   #3b4252   #3b4252
-client.background       #2e3440
+# Cyberpunk colors    border    bg        text      indicator child_border
+client.focused          #ff2079   #0a0e14   #00ffd5   #b967ff   #05d9e8
+client.focused_inactive #1a2332   #0a0e14   #4c566a   #1a2332   #1a2332
+client.unfocused        #1a2332   #0a0e14   #4c566a   #1a2332   #1a2332
+client.urgent           #ff3860   #ff2079   #0a0e14   #ff3860   #ff3860
+client.placeholder      #0a0e14   #0a0e14   #4c566a   #0a0e14   #0a0e14
+client.background       #0a0e14
 
 # =============================================================================
 # BAR
@@ -189,15 +193,15 @@ bar {
         tray_output primary
 
         colors {
-            background #2e3440
-            statusline #d8dee9
-            separator  #2e3440
+            background #0a0e14
+            statusline #00ffd5
+            separator  #0a0e14
 
-            focused_workspace  #2e3440   #2e3440   #5e81ac
-            active_workspace   #2e3440   #2e3440   #d8dee9
-            inactive_workspace #2e3440   #2e3440   #4c566a
-            urgent_workspace   #2e3440   #bf616a   #eceff4
-            binding_mode       #2e3440   #b48ead   #eceff4
+            focused_workspace  #0a0e14   #0a0e14   #00ffd5
+            active_workspace   #0a0e14   #0a0e14   #b967ff
+            inactive_workspace #0a0e14   #0a0e14   #4c566a
+            urgent_workspace   #0a0e14   #ff2079   #0a0e14
+            binding_mode       #0a0e14   #b967ff   #0a0e14
         }
 }
 
@@ -205,9 +209,9 @@ bar {
 # MULTI-MONITOR
 # =============================================================================
 
-exec_always --no-startup-id xrandr \
+exec_always --no-startup-id xrandr --output eDP --off && xrandr \
     --output HDMI-A-0 --mode 1920x1080 --pos 0x0 --primary \
-    --output eDP --mode 2880x1800 --pos 0x1080 --scale 0.6667x0.6667
+    --output eDP --mode 2880x1800 --pos 0x1080 --scale-from 1920x1200
 
 workspace 1 output HDMI-A-0
 workspace 2 output HDMI-A-0
@@ -227,4 +231,4 @@ bindsym $mod+o move workspace to output down
 # WALLPAPER
 # =============================================================================
 
-exec_always --no-startup-id feh --randomize --bg-fill ~/Pictures/wallpapers/*
+exec_always --no-startup-id bash -c 'WP=$(ls ~/Pictures/wallpapers/* | shuf -n1) && feh --bg-fill "$WP" "$WP"'
