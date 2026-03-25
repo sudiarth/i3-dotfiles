@@ -36,7 +36,49 @@ sudo apt install -y \
     pavucontrol \
     libnotify-bin \
     xdg-desktop-portal-wlr \
-    xwayland
+    xwayland \
+    foot
+
+# =============================================================================
+# NVIDIA GPU FIX
+# =============================================================================
+
+if lspci | grep -qi nvidia && ! lsmod | grep -q nouveau; then
+    echo ""
+    echo "  Nvidia proprietary driver detected!"
+    echo "  Setting up Sway with --unsupported-gpu flag..."
+
+    # Create wrapper script
+    mkdir -p ~/.local/bin
+    cat > ~/.local/bin/sway-nvidia << 'LAUNCHEREOF'
+#!/bin/bash
+export WLR_NO_HARDWARE_CURSORS=1
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export MOZ_ENABLE_WAYLAND=1
+export _JAVA_AWT_WM_NONREPARENTING=1
+exec sway --unsupported-gpu "$@"
+LAUNCHEREOF
+    chmod +x ~/.local/bin/sway-nvidia
+
+    # Install system-wide session entry
+    sudo cp ~/.local/bin/sway-nvidia /usr/local/bin/sway-nvidia
+    sudo tee /usr/share/wayland-sessions/sway-nvidia.desktop > /dev/null << 'SESSIONEOF'
+[Desktop Entry]
+Name=Sway
+Comment=Sway compositor with Nvidia GPU support
+Exec=/usr/local/bin/sway-nvidia
+Type=Application
+DesktopNames=sway
+SESSIONEOF
+    echo "  Created 'Sway' session entry with Nvidia support."
+    echo "  Select 'Sway' from the login screen gear icon."
+fi
 
 echo ""
 echo "[2/4] Creating config directories..."
