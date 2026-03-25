@@ -105,6 +105,9 @@ cp "$SCRIPT_DIR/wallpapers/"* "$REAL_HOME/Pictures/wallpapers/"
 chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/Pictures/wallpapers"
 
 echo "=== Applying GTK settings ==="
+mkdir -p "$REAL_HOME/.config/gtk-4.0"
+cp "$SCRIPT_DIR/gtk4.css" "$REAL_HOME/.config/gtk-4.0/gtk.css"
+chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/gtk-4.0/gtk.css"
 sudo -u "$REAL_USER" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $REAL_USER)/bus" \
     gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark' 2>/dev/null || true
 sudo -u "$REAL_USER" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $REAL_USER)/bus" \

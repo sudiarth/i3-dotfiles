@@ -1,0 +1,8 @@
+/* Remove rounded corners in tiling WM */
+window,
+window.background,
+window.background.csd,
+.titlebar,
+headerbar {
+    border-radius: 0;
+}
