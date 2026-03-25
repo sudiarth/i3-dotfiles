@@ -10,6 +10,7 @@ exec --no-startup-id eval $(gnome-keyring-daemon --start --components=pkcs11,sec
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
 exec --no-startup-id picom --backend glx --no-fading-openclose --frame-opacity 0.22
 
 # =============================================================================
@@ -191,6 +192,7 @@ bar {
         padding 0px 4px 0px 4px
         strip_workspace_numbers yes
         tray_output primary
+        tray_padding 2
 
         colors {
             background #303030
