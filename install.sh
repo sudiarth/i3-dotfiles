@@ -2,24 +2,24 @@
 # =============================================================================
 # i3 Desktop Setup - Single Install Script
 # =============================================================================
-# Sets up i3 with Dracula theme, rofi, wallpapers, multi-monitor, GTK themes
+# Sets up i3 with Nord theme, rofi, i3status, wallpapers, multi-monitor,
+# GTK themes, power menu, picom compositor, and useful tools.
 #
 # Usage:
-#   chmod +x install.sh
+#   git clone https://github.com/sudiarth/i3-dotfiles
+#   cd i3-dotfiles
 #   sudo ./install.sh
 #
-# After install, restart i3 with Mod+Shift+r
+# After install, log out and log back in to i3.
 # =============================================================================
 
 set -e
 
-# Must run as root
 if [ "$EUID" -ne 0 ]; then
     echo "Please run with sudo: sudo ./install.sh"
     exit 1
 fi
 
-# Get the actual user (not root)
 REAL_USER="${SUDO_USER:-$USER}"
 REAL_HOME=$(eval echo "~$REAL_USER")
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -32,12 +32,18 @@ apt install -y \
     i3lock \
     rofi \
     feh \
+    picom \
+    scrot \
+    dunst \
+    brightnessctl \
+    playerctl \
     lxappearance \
     pavucontrol \
     arandr \
-    nm-applet \
-    fonts-font-awesome \
+    network-manager-gnome \
     blueman \
+    fonts-font-awesome \
+    gtk3-nocsd \
     arc-theme \
     breeze-gtk-theme \
     numix-gtk-theme \
@@ -54,10 +60,16 @@ mkdir -p "$REAL_HOME/.config/i3"
 cp "$SCRIPT_DIR/i3-config" "$REAL_HOME/.config/i3/config"
 chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3/config"
 
-echo "=== Setting up GTK theme ==="
-mkdir -p "$REAL_HOME/.config/gtk-3.0"
-cp "$SCRIPT_DIR/gtk.css" "$REAL_HOME/.config/gtk-3.0/gtk.css"
-chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/gtk-3.0/gtk.css"
+echo "=== Setting up i3status config ==="
+mkdir -p "$REAL_HOME/.config/i3status"
+cp "$SCRIPT_DIR/i3status-config" "$REAL_HOME/.config/i3status/config"
+chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config/i3status/config"
+
+echo "=== Setting up power menu ==="
+mkdir -p "$REAL_HOME/.local/bin"
+cp "$SCRIPT_DIR/powermenu" "$REAL_HOME/.local/bin/powermenu"
+chmod +x "$REAL_HOME/.local/bin/powermenu"
+chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.local/bin/powermenu"
 
 echo "=== Copying wallpapers ==="
 mkdir -p "$REAL_HOME/Pictures/wallpapers"
@@ -66,7 +78,7 @@ chown -R "$REAL_USER:$REAL_USER" "$REAL_HOME/Pictures/wallpapers"
 
 echo "=== Applying GTK settings ==="
 sudo -u "$REAL_USER" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $REAL_USER)/bus" \
-    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' 2>/dev/null || true
+    gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark' 2>/dev/null || true
 sudo -u "$REAL_USER" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $REAL_USER)/bus" \
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
 
@@ -75,12 +87,25 @@ echo "========================================="
 echo "  Setup complete!"
 echo "========================================="
 echo ""
-echo "  Restart i3: Mod+Shift+r"
-echo "  App launcher: Mod+Space or Mod+d"
-echo "  Settings:"
-echo "    Appearance:  lxappearance"
-echo "    Sound:       pavucontrol"
-echo "    Display:     arandr"
-echo "    Network:     nm-connection-editor"
-echo "    Bluetooth:   blueman-manager"
+echo "  Log out and log back in to i3."
+echo ""
+echo "  Keybindings:"
+echo "    Mod+Space      App launcher (rofi)"
+echo "    Mod+Return     Terminal"
+echo "    Mod+Shift+q    Kill window"
+echo "    Mod+Shift+e    Power menu (lock/logout/reboot/shutdown)"
+echo "    Mod+Shift+r    Restart i3"
+echo "    Mod+r          Resize mode"
+echo "    Mod+f          Fullscreen"
+echo "    Mod+h/j/k/l    Focus left/down/up/right"
+echo "    Mod+1-0        Switch workspace"
+echo "    Mod+p/o        Move workspace between monitors"
+echo "    Print          Screenshot"
+echo ""
+echo "  Settings apps:"
+echo "    lxappearance        Appearance / GTK theme"
+echo "    pavucontrol         Sound / Volume"
+echo "    arandr              Display / Monitor layout"
+echo "    nm-connection-editor  Network / WiFi"
+echo "    blueman-manager     Bluetooth"
 echo ""
