@@ -173,9 +173,9 @@ for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] floating enable
 for_window [class=Eog|Sxiv|feh|mpv|Vlc|File-roller|Xarchiver] focus
 
 # Cyberpunk colors    border    bg        text      indicator child_border
-client.focused          #ff2079   #0a0e14   #00ffd5   #b967ff   #05d9e8
-client.focused_inactive #1a2332   #0a0e14   #4c566a   #1a2332   #1a2332
-client.unfocused        #1a2332   #0a0e14   #4c566a   #1a2332   #1a2332
+client.focused          #b967ff   #0a0e14   #00ffd5   #b967ff   #b967ff
+client.focused_inactive #00ffd5   #0a0e14   #4c566a   #00ffd5   #00ffd5
+client.unfocused        #00ffd5   #0a0e14   #4c566a   #00ffd5   #00ffd5
 client.urgent           #ff3860   #ff2079   #0a0e14   #ff3860   #ff3860
 client.placeholder      #0a0e14   #0a0e14   #4c566a   #0a0e14   #0a0e14
 client.background       #0a0e14
