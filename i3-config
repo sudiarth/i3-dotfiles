@@ -197,11 +197,11 @@ bar {
             statusline #C2C2C2
             separator  #616161
 
-            focused_workspace  #F2F2F2   #F2F2F2   #303030
-            active_workspace   #616161   #616161   #F2F2F2
+            focused_workspace  #303030   #303030   #F2F2F2
+            active_workspace   #303030   #303030   #C2C2C2
             inactive_workspace #303030   #303030   #919191
-            urgent_workspace   #F2F2F2   #F2F2F2   #303030
-            binding_mode       #C2C2C2   #C2C2C2   #303030
+            urgent_workspace   #303030   #303030   #F2F2F2
+            binding_mode       #303030   #303030   #C2C2C2
         }
 }
 
