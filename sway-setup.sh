@@ -105,9 +105,48 @@ floating_modifier $mod normal
 # Wallpaper (built-in, no feh needed)
 output * bg ~/.config/sway/wallpaper.jpg fill
 
-# Example: configure specific monitors
-# output HDMI-A-1 resolution 1920x1080 position 0,0
-# output eDP-1 resolution 1920x1080 position 1920,0
+# Multi-monitor setup (extend, not mirror)
+# Laptop display at bottom, external monitor above
+# Layout:
+#   +------------------+
+#   |   HDMI-A-1       |  (external, position 0,0)
+#   +------------------+
+#   +------------------+
+#   |   eDP-1 / eDP    |  (laptop, position 0,<ext_height>)
+#   +------------------+
+#
+# IMPORTANT: Run 'swaymsg -t get_outputs' to find your actual output names
+# and adjust the names below if needed. Common names:
+#   Laptop:   eDP-1, eDP, eDP-2
+#   HDMI:     HDMI-A-1, HDMI-A-0, HDMI-A-2
+#   DP:       DP-1, DP-2
+
+# Laptop display
+output eDP-1 position 0,1080
+output eDP position 0,1080
+
+# External monitor (above laptop)
+output HDMI-A-1 position 0,0
+output HDMI-A-0 position 0,0
+output DP-1 position 0,0
+output DP-2 position 0,0
+
+# Assign workspaces to monitors (1-5 external, 6-10 laptop)
+workspace 1 output HDMI-A-1 HDMI-A-0 DP-1 DP-2 eDP-1 eDP
+workspace 2 output HDMI-A-1 HDMI-A-0 DP-1 DP-2 eDP-1 eDP
+workspace 3 output HDMI-A-1 HDMI-A-0 DP-1 DP-2 eDP-1 eDP
+workspace 4 output HDMI-A-1 HDMI-A-0 DP-1 DP-2 eDP-1 eDP
+workspace 5 output HDMI-A-1 HDMI-A-0 DP-1 DP-2 eDP-1 eDP
+workspace 6 output eDP-1 eDP HDMI-A-1 HDMI-A-0 DP-1 DP-2
+workspace 7 output eDP-1 eDP HDMI-A-1 HDMI-A-0 DP-1 DP-2
+workspace 8 output eDP-1 eDP HDMI-A-1 HDMI-A-0 DP-1 DP-2
+workspace 9 output eDP-1 eDP HDMI-A-1 HDMI-A-0 DP-1 DP-2
+workspace 10 output eDP-1 eDP HDMI-A-1 HDMI-A-0 DP-1 DP-2
+
+# Quick keybinds to move workspace between monitors
+bindsym $mod+p move workspace to output up
+bindsym $mod+o move workspace to output down
+
 # Use: swaymsg -t get_outputs  to list monitors
 
 # ==============================================================================
