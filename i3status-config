@@ -14,28 +14,28 @@ order += "battery 0"
 order += "tztime local"
 
 cpu_usage {
-	format = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  %usage  </span>"
+	format = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  %usage  </span>"
 }
 
 cpu_temperature 0 {
-	format = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  %degrees °C  </span>"
+	format = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  %degrees °C  </span>"
 	path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 memory {
-	format = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  %percentage_used  </span>"
+	format = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  %percentage_used  </span>"
 	threshold_degraded = "20%"
 	threshold_critical = "10%"
 }
 
 wireless wlp2s0 {
-	format_up = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  %essid  </span>"
-	format_down = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  Disconnected  </span>"
+	format_up = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  %essid  </span>"
+	format_down = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  Disconnected  </span>"
 }
 
 volume master {
-	format = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  %volume  </span>"
-	format_muted = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  Muted  </span>"
+	format = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  %volume  </span>"
+	format_muted = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  Muted  </span>"
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
@@ -43,7 +43,7 @@ volume master {
 
 battery 0 {
 	last_full_capacity = true
-	format = "<span foreground='#64748b'>  %status  </span><span foreground='#f8fafc'>  %percentage  </span>"
+	format = "<span foreground='#919191'>  %status  </span><span foreground='#C2C2C2'>  %percentage  </span>"
 	format_down = "No Battery"
 	status_chr = ""
 	status_bat = ""
@@ -55,5 +55,5 @@ battery 0 {
 }
 
 tztime local {
-	format = "<span foreground='#64748b'>  </span><span foreground='#f8fafc'>  %b %d at %H:%M  </span>"
+	format = "<span foreground='#919191'>  </span><span foreground='#C2C2C2'>  %b %d at %H:%M  </span>"
 }
