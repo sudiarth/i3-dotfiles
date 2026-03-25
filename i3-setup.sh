@@ -38,7 +38,7 @@ sudo apt install -y \
     fonts-font-awesome
 
 echo ""
-echo "[2/3] Creating config directories..."
+echo "[2/3] Creating config directories and copying wallpapers..."
 
 # =============================================================================
 # CREATE DIRECTORIES
@@ -49,6 +49,21 @@ mkdir -p ~/.config/i3status
 mkdir -p ~/.config/rofi
 mkdir -p ~/.config/picom
 mkdir -p ~/.config/dunst
+
+# =============================================================================
+# COPY WALLPAPERS
+# =============================================================================
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -d "$SCRIPT_DIR/wallpapers" ]; then
+    mkdir -p ~/.config/i3/wallpapers
+    cp "$SCRIPT_DIR"/wallpapers/*.jpg ~/.config/i3/wallpapers/ 2>/dev/null
+    # Set default wallpaper (change this to your preferred one)
+    ln -sf ~/.config/i3/wallpapers/tokyo-night.jpg ~/.config/i3/wallpaper.jpg
+    echo "  Wallpapers copied to ~/.config/i3/wallpapers/"
+    echo "  Default: tokyo-night.jpg"
+    echo "  To change: ln -sf ~/.config/i3/wallpapers/FILENAME.jpg ~/.config/i3/wallpaper.jpg"
+fi
 
 # =============================================================================
 # i3 CONFIG
