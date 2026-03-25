@@ -10,7 +10,7 @@ exec --no-startup-id eval $(gnome-keyring-daemon --start --components=pkcs11,sec
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 exec --no-startup-id nm-applet
-exec --no-startup-id picom --backend glx --no-fading-openclose --inactive-opacity 0.22
+exec --no-startup-id picom --backend glx --no-fading-openclose --frame-opacity 0.22
 
 # =============================================================================
 # KEYBINDINGS
