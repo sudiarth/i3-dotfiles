@@ -183,8 +183,25 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Launch polybar (replaces i3bar)
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# i3bar
+bar {
+        status_command i3status
+        position bottom
+        separator_symbol " | "
+
+        colors {
+            background #1a1a2e
+            statusline #f8f8f2
+            separator  #44475a
+
+            #                  border    bg        text
+            focused_workspace  #6272a4   #6272a4   #f8f8f2
+            active_workspace   #44475a   #44475a   #f8f8f2
+            inactive_workspace #1a1a2e   #282a36   #888888
+            urgent_workspace   #ff5555   #ff5555   #f8f8f2
+            binding_mode       #ff79c6   #ff79c6   #f8f8f2
+        }
+}
 
 # ==============================================================================
 # WINDOW COLORS
