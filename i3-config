@@ -11,7 +11,6 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec --no-startup-id warp-taskbar
 exec --no-startup-id ibus exit
 exec --no-startup-id picom --backend glx --no-fading-openclose --frame-opacity 0.22
 exec --no-startup-id dunst
@@ -35,6 +34,9 @@ bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-1/powerm
 
 # Show keybindings
 bindsym $mod+F1 exec --no-startup-id ~/.config/i3/show-keys.sh
+
+# WARP toggle
+bindsym $mod+Shift+w exec --no-startup-id bash -c 'status=$(warp-cli --accept-tos status 2>/dev/null | head -1 | awk "{print \\$NF}"); if [ "$status" = "Connected" ]; then warp-cli --accept-tos disconnect; else warp-cli --accept-tos connect; fi'
 
 # Screenshot
 bindsym Print exec --no-startup-id scrot ~/Pictures/screenshot-%Y%m%d-%H%M%S.png
