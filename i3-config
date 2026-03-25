@@ -3,7 +3,7 @@
 # =============================================================================
 
 set $mod Mod4
-font pango:FontAwesome 11, Poppins Regular 11
+font pango:FontAwesome 8, Poppins Regular 8
 
 # Autostart
 exec --no-startup-id eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
@@ -188,7 +188,7 @@ bar {
         status_command i3status -c ~/.config/i3status/config
         position bottom
         workspace_min_width 48
-        padding 2px 8px 2px 8px
+        padding 0px 4px 0px 4px
         strip_workspace_numbers yes
         tray_output primary
 
