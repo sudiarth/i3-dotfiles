@@ -21,12 +21,12 @@ bindsym $mod+Return exec i3-sensible-terminal
 # Kill window
 bindsym $mod+Shift+q kill
 
-# App launcher
-bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
+# App launcher (adi1090x/rofi type-1)
+bindsym $mod+space exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
 
-# Power menu
-bindsym $mod+Shift+e exec --no-startup-id ~/.local/bin/powermenu
+# Power menu (adi1090x/rofi type-2)
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-2/powermenu.sh
 
 # Screenshot
 bindsym Print exec --no-startup-id scrot ~/Pictures/screenshot-%Y%m%d-%H%M%S.png
