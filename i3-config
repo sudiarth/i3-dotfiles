@@ -231,4 +231,4 @@ bindsym $mod+o move workspace to output down
 # WALLPAPER
 # =============================================================================
 
-exec_always --no-startup-id bash -c 'WP=$(ls ~/Pictures/wallpapers/* | shuf -n1) && feh --bg-fill "$WP" "$WP"'
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/541062.jpg
