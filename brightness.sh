@@ -1,5 +1,5 @@
 #!/bin/bash
-# Brightness control with dunst OSD notification
+# Brightness control with donut OSD
 
 case "$1" in
     up)   brightnessctl set +5%;;
@@ -7,4 +7,8 @@ case "$1" in
 esac
 
 BRIGHT=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
-dunstify -a "brightness" -u low -r 9998 -h int:value:"$BRIGHT" " $BRIGHT%"
+
+# Kill any existing OSD
+pkill -f "python3.*osd.py" 2>/dev/null
+
+python3 ~/.config/i3/osd.py "" "$BRIGHT" &
